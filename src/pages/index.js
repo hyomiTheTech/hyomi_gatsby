@@ -2,8 +2,9 @@ import React from "react"
 import {Link, graphql} from 'gatsby'
 import Layout from '../component/Layout'
 import { header, btn} from '../styles/home.module.css'
+import Img from 'gatsby-image'
 
-export default function Home() {
+export default function Home({data}) {
  
   return (
     <Layout>
@@ -14,11 +15,24 @@ export default function Home() {
           <p> US designer & web developer based in Vegas.</p>
           <Link className={btn} to="/projects">My Portfolio Projects</Link>
         </div>
-        <img src="/banner.png" alt="site banner" style={{maxWidth: "100%"}}/>
+        <Img fluid={data.file.childImageSharp.fluid} />
       </section>
     </Layout>
   )
 }
+
+export const query = graphql`
+query Banner {
+  file(relativePath: {eq: "banner.png"}) {
+    childImageSharp {
+      fluid {
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+}
+`
+
 
 // page query!!
 // refers to the tutorial #9
