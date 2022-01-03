@@ -1,21 +1,47 @@
-import React from "react"
-import Img from "gatsby-image"
-import Layout from "../component/Layout"
-import { details, featured } from '../styles/project-details.module.css'
+import React from 'react'
+import Layout from '../component/Layout'
+import { GatsbyImage } from "gatsby-plugin-image"
+import * as styles from '../styles/project-details.module.css'
+import { graphql } from 'gatsby'
 
-const ProjectDetails = () => {
+export default function ProjectDetails({ data }) {
+  const { html } = data.markdownRemark
+  const { title, stack, featuredImg } = data.markdownRemark.frontmatter
+  console.log(data)
+
+
   return (
     <Layout>
-      <div className={details}>
-        <h2>title</h2>
-        <h3>stack</h3>
-        <div className={featured}>
-          {/* <Img fluid={} /> */}
+      <div className={styles.details}>
+        <h2>{title}</h2>
+        <h3>{stack}</h3>
+        <div className={styles.featured}>
+          <GatsbyImage image={featuredImg.childImageSharp.gatsbyImageData} alt="featured" />
         </div>
-        {/* <div className={styles.html} dangerouslySetInnerHTML={} /> */}
+        <div className={styles.html} dangerouslySetInnerHTML={{ __html: html }} />
       </div>
     </Layout>
   )
 }
- 
-export default ProjectDetails
+
+
+export const query = graphql`
+query ProjectDetails($slug: String) {
+  markdownRemark(frontmatter: {slug: {eq: $slug}}) {
+    html
+    frontmatter {
+      stack
+      title
+      featuredImg {
+        childImageSharp {
+          gatsbyImageData(
+            layout: FULL_WIDTH
+            placeholder: BLURRED
+            transformOptions: {grayscale: true}
+          )
+        }
+      }
+    }
+  }
+}
+`
