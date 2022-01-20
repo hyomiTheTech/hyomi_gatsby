@@ -106,5 +106,5 @@ Gatsby Cloud is an end-to-end cloud platform specifically built for the Gatsby f
 
 ## Gitpod Button
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#<https://github.com/hyomiTheTech/nextjs-dapp-template>)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#<https://github.com/hyomiTheTech/hyomi_gatsby>)
 
